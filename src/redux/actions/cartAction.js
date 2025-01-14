@@ -8,7 +8,10 @@ export const getCartByUserId = () => async (dispatch) => {
     const response = await API.get(`users/${userId}/cart`);
     dispatch({ type: GET_CART_BY_USERID_SUCCESS, payload: response.data });
   } catch (error) {
-    dispatch({ type: GET_CART_BY_USERID_FAIL, payload: error });
+    dispatch({
+      type: GET_CART_BY_USERID_FAIL,
+      payload: error.response?.data || "Failed to fetch cart",
+    });
   }
 };
 
@@ -24,7 +27,10 @@ export const postCart = (productId, increase, decrease) => async (dispatch) => {
     });
     dispatch({ type: POST_CART_SUCCESS, payload: response.data });
   } catch (error) {
-    dispatch({ type: POST_CART_FAIL, payload: error });
+    dispatch({
+      type: POST_CART_FAIL,
+      payload: error.response?.data || "Failed to update cart",
+    });
   }
 };
 

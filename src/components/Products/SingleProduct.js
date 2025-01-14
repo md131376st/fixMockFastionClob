@@ -1,13 +1,16 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
 import React from "react";
+import PropTypes from "prop-types";
 import jumpTo from "../../modules/Navigation";
 
-const SingleProduct = ({productItem, addToBag}) => {
+const SingleProduct = ({ productItem, addToBag }) => {
+    const handleAddToBag = () => {
+        if (typeof addToBag === "function") {
+            addToBag(productItem._id);
+        } else {
+            console.error("addToBag is not a function");
+        }
+    };
+
     return (
         <div className="product-item men">
             <div
@@ -15,7 +18,7 @@ const SingleProduct = ({productItem, addToBag}) => {
                 onClick={() => jumpTo(`/fashion-cube/single-product/${productItem._id}`)}
             >
                 <div className="product_image">
-                    <img src={productItem.imagePath} alt={productItem.title} className="img-fluid"/>
+                    <img src={productItem.imagePath} alt={productItem.title} className="img-fluid" />
                 </div>
                 <div className="favorite favorite_left">
                     <i className="far fa-heart"></i>
@@ -32,12 +35,17 @@ const SingleProduct = ({productItem, addToBag}) => {
             </div>
             <div
                 className="red_button add_to_cart_button"
-                onClick={() => addToBag(productItem._id)}
+                onClick={handleAddToBag}
             >
-                <div style={{color: "#ffffff"}}>add to cart</div>
+                <div style={{ color: "#ffffff" }}>add to cart</div>
             </div>
         </div>
     );
+};
+
+SingleProduct.propTypes = {
+    productItem: PropTypes.object.isRequired,
+    addToBag: PropTypes.func.isRequired,
 };
 
 export default SingleProduct;

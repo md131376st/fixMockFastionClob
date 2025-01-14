@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
       return { ...state, cart: action.payload.data.cart, loading: false };
     case POST_CART_FAIL:
     case GET_CART_BY_USERID_FAIL:
-      return { ...state, loading: false, error: action.payload?.error?.response?.data };
+      return { ...state, loading: false, error: action.payload?.error?.response?.data || "Unknown Error" };
     default:
       return state;
   }

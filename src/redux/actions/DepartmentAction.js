@@ -6,7 +6,10 @@ export const getDepartments = () => async (dispatch) => {
     const response = await API.get("/departments");
     dispatch({ type: GET_DEPARTMENTS_SUCCESS, payload: response.data });
   } catch (error) {
-    dispatch({ type: GET_DEPARTMENTS_FAIL, payload: error });
+    dispatch({
+      type: GET_DEPARTMENTS_FAIL,
+      payload: error.response?.data || "Failed to fetch departments",
+    });
   }
 };
 

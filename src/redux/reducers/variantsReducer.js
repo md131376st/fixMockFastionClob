@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case GET_VARIANTS_QUERY_SUCCESS:
       return { ...state, variants: action.payload.data.variants, loading: false };
     case GET_VARIANTS_QUERY_FAIL:
-      return { ...state, loading: false, error: action.payload?.error };
+      return { ...state, loading: false, error: action.payload?.error?.response?.data || "Variants fetch failed" };
     default:
       return state;
   }

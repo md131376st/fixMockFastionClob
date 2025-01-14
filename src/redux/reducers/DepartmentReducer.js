@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
     case GET_DEPARTMENTS_SUCCESS:
       return { ...state, loading: false, departments: action.payload.data.departments };
     case GET_DEPARTMENTS_FAIL:
-      return { ...state, loading: false, error: action.payload?.error?.response?.data };
+      return { ...state, loading: false, error: action.payload?.error?.response?.data || "Failed to fetch departments" };
     default:
       return state;
   }

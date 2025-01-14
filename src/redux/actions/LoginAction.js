@@ -6,7 +6,10 @@ export const userLogin = (email, password) => async (dispatch) => {
     const response = await login(email, password);
     dispatch({ type: LOGIN_SUCCESS, payload: response });
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error });
+    dispatch({
+      type: LOGIN_FAIL,
+      payload: error.response?.data || "Login failed",
+    });
     throw error;
   }
 };

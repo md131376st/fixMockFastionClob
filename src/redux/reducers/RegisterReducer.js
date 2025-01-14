@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
     case POST_REGISTER_SUCCESS:
       return { ...state, register_loading: false };
     case POST_REGISTER_FAIL:
-      return { ...state, register_loading: false, error: action.payload?.error?.response?.data };
+      return { ...state, register_loading: false, error: action.payload?.error?.response?.data || "Registration failed" };
     default:
       return state;
   }

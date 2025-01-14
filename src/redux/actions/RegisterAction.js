@@ -6,7 +6,10 @@ export const userRegister = (fullname, email, password, verifyPassword) => async
     const response = await register(fullname, email, password, verifyPassword);
     dispatch({ type: POST_REGISTER_SUCCESS, payload: response });
   } catch (error) {
-    dispatch({ type: POST_REGISTER_FAIL, payload: error });
+    dispatch({
+      type: POST_REGISTER_FAIL,
+      payload: error.response?.data || "Registration failed",
+    });
     throw error;
   }
 };

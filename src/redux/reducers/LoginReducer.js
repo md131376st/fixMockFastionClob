@@ -10,9 +10,9 @@ export default (state = initialState, action) => {
     case LOGIN_BEGIN:
       return { ...state, signin_loading: true };
     case LOGIN_SUCCESS:
-      return { ...state, signin_loading: false };
+      return { ...state, signin_loading: false, error: null };
     case LOGIN_FAIL:
-      return { ...state, signin_loading: false, error: action.payload?.error?.response?.data };
+      return { ...state, signin_loading: false, error: action.payload?.error?.response?.data || "Login failed" };
     default:
       return state;
   }

@@ -12,6 +12,9 @@ import { postCart } from "../../redux/actions/cartAction";
 
 const CategoryContainer = () => {
   const products = useSelector((state) => state.product.products);
+  const loading = useSelector((state) => state.product.loading);
+  const error = useSelector((state) => state.product.error);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,6 +22,14 @@ const CategoryContainer = () => {
       dispatch(getAllProducts());
     }
   }, [dispatch, products]);
+
+  if (loading) {
+    return <div>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading products: {error.message}</div>;
+  }
 
   return (
       <Category

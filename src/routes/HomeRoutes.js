@@ -14,7 +14,8 @@ import BaseLayout from "../layouts/BaseLayout";
 import Home from "../views/Home/HomeContainer";
 import SingleProductContainer from "../views/Product/SingleProductContainer";
 import CategoryContainer from "../views/Category/CategoryContainer";
-
+import CartContainer from "../views/Cart/CartContainer";
+import { useLocation } from "react-router-dom";
 const routes = [
   {
     path: "/fashion-cube",
@@ -40,10 +41,18 @@ const routes = [
     path: "/fashion-cube/shops/:category",
     element: (
         <BaseLayout>
-          <CategoryContainer />
+          <CategoryContainer  />
         </BaseLayout>
     ),
   },
+    {
+        path: "/fashion-cube/cart",
+        element: (
+            <BaseLayout>
+                <CartContainer />
+            </BaseLayout>
+        ),
+    },
 ];
 
 export default routes;

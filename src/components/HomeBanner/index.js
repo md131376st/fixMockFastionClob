@@ -9,15 +9,17 @@ import PropTypes from "prop-types";
 import { Carousel } from "react-bootstrap";
 
 const HomeBanner = ({ slides }) => {
+  if (!slides || slides.length === 0) {
+    return <div>No slides available</div>; // Fallback UI
+  }
+
   return (
       <Carousel>
         {slides.map((slide, index) => (
             <Carousel.Item key={index}>
               <div
                   className="d-block w-100 main_slider"
-                  style={{
-                    backgroundImage: `url(${slide.image})`,
-                  }}
+                  style={{ backgroundImage: `url(${slide.image})` }}
               >
                 <div className="container fill_height">
                   <div className="row align-items-center fill_height">
@@ -47,24 +49,11 @@ HomeBanner.propTypes = {
         subtitle: PropTypes.string.isRequired,
         link: PropTypes.string,
       })
-  ).isRequired,
+  ),
 };
 
 HomeBanner.defaultProps = {
-  slides: [
-    {
-      image: "/path/to/default1.jpg",
-      title: "Get up to 30% Off New Arrivals",
-      subtitle: "Spring / Summer Collection 2017",
-      link: "#",
-    },
-    {
-      image: "/path/to/default2.jpg",
-      title: "Discover the Latest Trends",
-      subtitle: "Autumn / Winter Collection 2017",
-      link: "#",
-    },
-  ],
+  slides: [], // Default to an empty array
 };
 
 export default HomeBanner;

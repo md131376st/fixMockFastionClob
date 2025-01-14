@@ -6,6 +6,7 @@
 
 import Auth from "../modules/Auth";
 import axios from "axios";
+import mockAPI from "./mockAPI";
 
 // Base URL configuration
 const BASE_URL = "http://localhost:3000";
@@ -50,7 +51,8 @@ axiosInstance.interceptors.response.use(
 
 // API wrapper
 const API = (config) => {
-  return axiosInstance(config);
+    // return axiosInstance(config);
+    return mockAPI(config);
 };
 
 export default API;
