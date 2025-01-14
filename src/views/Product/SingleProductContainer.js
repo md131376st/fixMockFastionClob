@@ -4,20 +4,30 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {connect} from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import SingleProduct from "./SingleProduct";
-import {getProduct} from "../../redux/actions/productAction";
-import {getVariantsByProductId} from "../../redux/actions/variantsAction";
-import {postCart} from "../../redux/actions/cartAction";
-
-const mapStoreToProps = (state) => ({
-  product: state.product.product,
-  variants: state.variant.variants,
-});
-const mapDispatchToProps = {
+import {
   getProduct,
   getVariantsByProductId,
-  postCart,
+} from "../../redux/actions/productAction";
+import { postCart } from "../../redux/actions/cartAction";
+
+const SingleProductContainer = ({ location }) => {
+  const product = useSelector((state) => state.product.product);
+  const variants = useSelector((state) => state.variant.variants);
+  const dispatch = useDispatch();
+
+  return (
+      <SingleProduct
+          product={product}
+          variants={variants}
+          location={location}
+          getProduct={(id) => dispatch(getProduct(id))}
+          getVariantsByProductId={(id) => dispatch(getVariantsByProductId(id))}
+          postCart={(id) => dispatch(postCart(id))}
+      />
+  );
 };
 
-export default connect(mapStoreToProps, mapDispatchToProps)(SingleProduct);
+export default SingleProductContainer;

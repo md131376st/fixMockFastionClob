@@ -1,0 +1,309 @@
+{
+  "clothingData": [
+    {
+      "id": 1,
+      "name": "Slim Fit Jeans",
+      "model": "Denim",
+      "price": "$70.00",
+      "category": "Bottoms",
+      "colorOptions": [
+        {
+          "color": "Dark Blue",
+          "image": "/images/recommendation/bottoms/0c00c6897fe863a1ad56d0af0de371b8.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": true
+            },
+            {
+              "size": "30",
+              "available": true
+            },
+            {
+              "size": "32",
+              "available": false
+            },
+            {
+              "size": "34",
+              "available": true
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "/images/recommendation/bottoms/4db1ad3e64d6585fc887e3de198c33a2.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": true
+            },
+            {
+              "size": "30",
+              "available": false
+            },
+            {
+              "size": "32",
+              "available": true
+            },
+            {
+              "size": "34",
+              "available": true
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Chino Pants",
+      "model": "hot pants",
+      "price": "$60.00",
+      "category": "Bottoms",
+      "colorOptions": [
+        {
+          "color": "LightBlue",
+          "image": "/images/recommendation/bottoms/2ef25a868c2ec93dab63126e4ab06e76.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": true
+            },
+            {
+              "size": "30",
+              "available": true
+            },
+            {
+              "size": "32",
+              "available": true
+            },
+            {
+              "size": "34",
+              "available": false
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        },
+        {
+          "color": "White",
+          "image": "/images/recommendation/bottoms/6e99db94ca653cb7b887ecb1a04cdec6.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": false
+            },
+            {
+              "size": "30",
+              "available": true
+            },
+            {
+              "size": "32",
+              "available": true
+            },
+            {
+              "size": "34",
+              "available": true
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "sailor pants",
+      "model": "Relaxed Fit",
+      "price": "$45.00",
+      "category": "Bottoms",
+      "colorOptions": [
+        {
+          "color": "Chocolate",
+          "image": "/images/recommendation/bottoms/7afc8acdc79cbacf4756617f52aaf246.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": true
+            },
+            {
+              "size": "30",
+              "available": false
+            },
+            {
+              "size": "32",
+              "available": true
+            },
+            {
+              "size": "34",
+              "available": true
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        },
+        {
+          "color": "AntiqueWhite",
+          "image": "/images/recommendation/bottoms/00f9272f652fde49cae740deab4efec4.jpg",
+          "sizeOptions": [
+            {
+              "size": "28",
+              "available": true
+            },
+            {
+              "size": "30",
+              "available": true
+            },
+            {
+              "size": "32",
+              "available": false
+            },
+            {
+              "size": "34",
+              "available": true
+            },
+            {
+              "size": "36",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "shorts",
+      "model": "Casual Fit",
+      "price": "$55.00",
+      "category": "Bottoms",
+      "colorOptions": [
+        {
+          "color": "Black",
+          "image": "/images/recommendation/bottoms/0d89610f4599768e7cc064b54230e09b.jpg",
+          "sizeOptions": [
+            {
+              "size": "XS",
+              "available": true
+            },
+            {
+              "size": "S",
+              "available": true
+            },
+            {
+              "size": "M",
+              "available": false
+            },
+            {
+              "size": "L",
+              "available": true
+            },
+            {
+              "size": "XL",
+              "available": true
+            }
+          ]
+        },
+        {
+          "color": "Red",
+          "image": "/images/recommendation/bottoms/8c580878a1f161ab343f2a39f8eb414c.jpg",
+          "sizeOptions": [
+            {
+              "size": "XS",
+              "available": false
+            },
+            {
+              "size": "S",
+              "available": true
+            },
+            {
+              "size": "M",
+              "available": true
+            },
+            {
+              "size": "L",
+              "available": true
+            },
+            {
+              "size": "XL",
+              "available": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Jogger Pants",
+      "model": "Athletic Fit",
+      "price": "$50.00",
+      "category": "Bottoms",
+      "colorOptions": [
+        {
+          "color": "DarkRed",
+          "image": "/images/recommendation/bottoms/9c39e9d193837f04103201d09a90fc50.jpg",
+          "sizeOptions": [
+            {
+              "size": "S",
+              "available": true
+            },
+            {
+              "size": "M",
+              "available": true
+            },
+            {
+              "size": "L",
+              "available": false
+            },
+            {
+              "size": "XL",
+              "available": true
+            },
+            {
+              "size": "XXL",
+              "available": true
+            }
+          ]
+        },
+        {
+          "color": "Black",
+          "image": "/images/recommendation/bottoms/72d21346e5068590dd5500147aad2258.jpg",
+          "sizeOptions": [
+            {
+              "size": "S",
+              "available": false
+            },
+            {
+              "size": "M",
+              "available": true
+            },
+            {
+              "size": "L",
+              "available": true
+            },
+            {
+              "size": "XL",
+              "available": true
+            },
+            {
+              "size": "XXL",
+              "available": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

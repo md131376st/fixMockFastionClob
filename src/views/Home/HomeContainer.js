@@ -4,20 +4,29 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {applyFilters, getAllProducts} from "../../redux/actions/productAction";
-import {connect} from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Home from "./Home";
-import {postCart} from "../../redux/actions/cartAction";
+import { getAllProducts, applyFilters } from "../../redux/actions/productAction";
+import { postCart } from "../../redux/actions/cartAction";
 
-const mapStoreToProps = state => ({
-  products: state.product.products,
-  departments: state.department.departments,
-  loading: state.product.loading
-});
-const mapDispatchToProps = dispatch => ({
-  getAllProducts: () => dispatch(getAllProducts()),
-  applyFilters: filter_string => dispatch(applyFilters(filter_string)),
-  postCart: productId => dispatch(postCart(productId))
-});
+const HomeContainer = () => {
+  const products = useSelector((state) => state.product.products);
+  const departments = useSelector((state) => state.department.departments);
+  const dispatch = useDispatch();
 
-export default connect(mapStoreToProps, mapDispatchToProps)(Home);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  return (
+      <Home
+          products={products}
+          departments={departments}
+          getAllProducts={() => dispatch(getAllProducts())}
+          postCart={(productId) => dispatch(postCart(productId))}
+      />
+  );
+};
+
+export default HomeContainer;

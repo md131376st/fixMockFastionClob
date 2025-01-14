@@ -4,19 +4,36 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {applyFilters, getAllProducts} from "../../redux/actions/productAction";
-import {connect} from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Category from "./Category";
-import {postCart} from "../../redux/actions/cartAction";
+import { getAllProducts, applyFilters } from "../../redux/actions/productAction";
+import { postCart } from "../../redux/actions/cartAction";
 
-const mapStoreToProps = state => ({
-  products: state.product.products,
-  loading: state.product.loading
-});
-const mapDispatchToProps = dispatch => ({
-  getAllProducts: () => dispatch(getAllProducts()),
-  applyFilters: filter_string => dispatch(applyFilters(filter_string)),
-  postCart: productId => dispatch(postCart(productId))
-});
+const CategoryContainer = () => {
+  const products = useSelector((state) => state.product.products);
+  const dispatch = useDispatch();
 
-export default connect(mapStoreToProps, mapDispatchToProps)(Category);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  const handleApplyFilters = (filterString) => {
+    dispatch(applyFilters(filterString));
+  };
+
+  const handlePostCart = (productId) => {
+    dispatch(postCart(productId));
+  };
+
+  return (
+      <Category
+          products={products}
+          getAllProducts={() => dispatch(getAllProducts())}
+          applyFilters={handleApplyFilters}
+          postCart={handlePostCart}
+      />
+  );
+};
+
+export default CategoryContainer;

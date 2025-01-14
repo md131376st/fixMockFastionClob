@@ -1,94 +1,34 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
-import React, {Component} from "react";
-import Auth from "../../modules/Auth";
+import React, { useState, useEffect } from "react";
 import HomeBanner from "../../components/HomeBanner";
 import CategoryBanner from "../../components/CategoryBanner/CategoryBanner";
 import NewArrivals from "../../components/Products/NewArrivals";
 import BestSeller from "../../components/Products/BestSeller";
 import Benefit from "../../components/Benefit";
 import Advertisement from "../../components/Advertisement";
-import LoginRegister from "../../components/LoginRegisterModal";
+import clothingData from "../../data/clothingData.json"; // Import JSON data
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null,
-      modalShow: false,
-      login: true
-    };
-    this.addToBag = this.addToBag.bind(this);
-  }
+const Home = () => {
+  const [products, setProducts] = useState([]);
 
-  componentDidMount() {
-    if (!this.props.products) {
-      this.props.getAllProducts();
-    }
-  }
+  useEffect(() => {
+    // Simulate fetching data from JSON
+    setProducts(clothingData.clothingData);
+  }, []);
 
-  showHideModal = () => {
-    this.setState({ modalShow: false });
-  };
-
-  loginClicked = () => {
-    this.setState({ modalShow: true, login: true });
-  };
-  registerClicked = () => {
-    this.setState({ modalShow: true, login: false });
-  };
-
-  addToBag = params => {
-    if (
-      Auth.getUserDetails() !== undefined &&
-      Auth.getUserDetails() !== null &&
-      Auth.getToken() !== undefined
-    ) {
-      let cart = this.props.postCart(params);
-      cart.then(res => {
-        console.log(res);
-      });
-    } else {
-      this.setState({ modalShow: true });
-    }
-  };
-
-  render() {
-    const { products, departments } = this.props;
-    return (
+  return (
       <div>
         <HomeBanner />
         <CategoryBanner />
-        {products ? (
-          <NewArrivals
-            products={products}
-            departments={departments}
-            addToBag={this.addToBag}
-          />
-        ) : null}
+        {products.length > 0 && (
+            <NewArrivals products={products} />
+        )}
         <Benefit />
         <Advertisement />
-        {products ? (
-          <BestSeller
-            products={products}
-            departments={departments}
-            addToBag={this.addToBag}
-          />
-        ) : null}
-        <LoginRegister
-          show={this.state.modalShow}
-          login={this.state.login}
-          registerClicked={() => this.registerClicked()}
-          loginClicked={() => this.loginClicked()}
-          onHide={() => this.showHideModal()}
-        />
+        {products.length > 0 && (
+            <BestSeller products={products} />
+        )}
       </div>
-    );
-  }
-}
+  );
+};
 
 export default Home;

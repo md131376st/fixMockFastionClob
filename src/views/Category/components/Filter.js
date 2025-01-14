@@ -4,28 +4,23 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, {Component} from "react";
+import React from "react";
 
-class Filter extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <div class="sidebar_section">
-        <div class="sidebar_title">
+const Filter = () => {
+  return (
+      <div className="sidebar_section">
+        <div className="sidebar_title">
           <h5>Product Category</h5>
         </div>
-        <ul class="sidebar_categories">
+        <ul className="sidebar_categories">
           <li>
             <a href="#">Men</a>
           </li>
-          <li class="active">
+          <li className="active">
             <a href="#">
-              <span>
-                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-              </span>
+            <span>
+              <i className="fa fa-angle-double-right" aria-hidden="true"></i>
+            </span>
               Women
             </a>
           </li>
@@ -43,8 +38,7 @@ class Filter extends Component {
           </li>
         </ul>
       </div>
-    );
-  }
-}
+  );
+};
 
 export default Filter;
