@@ -4,94 +4,56 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import DEALOFWEEK from "../../assets/images/deal_ofthe_week.png";
-class Advertisement extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      days: 0,
-      hours: 0,
-      min: 0,
-      sec: 0
-    };
-  }
 
-  componentDidMount() {
-    // update every second
-    this.interval = setInterval(() => {
-      const date = this.calculateCountdown(this.props.date);
-      date ? this.setState(date) : this.stop();
+const Advertisement = ({ date }) => {
+  const [countDown, setCountDown] = useState({
+    days: 0,
+    hours: 0,
+    min: 0,
+    sec: 0,
+  });
+
+  useEffect(() => {
+    const calculateCountdown = (endDate) => {
+      const diff = (Date.parse(new Date(endDate)) - Date.parse(new Date())) / 1000;
+
+      if (diff <= 0) return false;
+
+      const timeLeft = {
+        days: Math.floor(diff / 86400), // 24 * 60 * 60
+        hours: Math.floor((diff % 86400) / 3600), // 60 * 60
+        min: Math.floor((diff % 3600) / 60),
+        sec: Math.floor(diff % 60),
+      };
+
+      return timeLeft;
+    };
+
+    const interval = setInterval(() => {
+      const timeLeft = calculateCountdown(date);
+      if (timeLeft) {
+        setCountDown(timeLeft);
+      } else {
+        clearInterval(interval);
+      }
     }, 1000);
-  }
 
-  componentWillUnmount() {
-    this.stop();
-  }
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, [date]);
 
-  calculateCountdown(endDate) {
-    let diff = (Date.parse(new Date(endDate)) - Date.parse(new Date())) / 1000;
+  const addLeadingZeros = (value) => value.toString().padStart(2, "0");
 
-    // clear countdown when date is reached
-    if (diff <= 0) return false;
-
-    const timeLeft = {
-      years: 0,
-      days: 0,
-      hours: 0,
-      min: 0,
-      sec: 0,
-      millisec: 0
-    };
-
-    // calculate time difference between now and expected date
-    if (diff >= 365.25 * 86400) {
-      // 365.25 * 24 * 60 * 60
-      timeLeft.years = Math.floor(diff / (365.25 * 86400));
-      diff -= timeLeft.years * 365.25 * 86400;
-    }
-    if (diff >= 86400) {
-      // 24 * 60 * 60
-      timeLeft.days = Math.floor(diff / 86400);
-      diff -= timeLeft.days * 86400;
-    }
-    if (diff >= 3600) {
-      // 60 * 60
-      timeLeft.hours = Math.floor(diff / 3600);
-      diff -= timeLeft.hours * 3600;
-    }
-    if (diff >= 60) {
-      timeLeft.min = Math.floor(diff / 60);
-      diff -= timeLeft.min * 60;
-    }
-    timeLeft.sec = diff;
-
-    return timeLeft;
-  }
-
-  stop() {
-    clearInterval(this.interval);
-  }
-
-  addLeadingZeros(value) {
-    value = String(value);
-    while (value.length < 2) {
-      value = "0" + value;
-    }
-    return value;
-  }
-
-  render() {
-    const countDown = this.state;
-    return (
+  return (
       <div className="deal_ofthe_week" data-aos="fade-up">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="deal_ofthe_week_img">
-                <img src={DEALOFWEEK} alt="" />
+                <img src={DEALOFWEEK} alt="Deal of the Week" />
               </div>
             </div>
             <div className="col-lg-6 text-right deal_ofthe_week_col">
@@ -102,7 +64,7 @@ class Advertisement extends Component {
                 <ul className="timer">
                   <li className="d-inline-flex flex-column justify-content-center align-items-center">
                     <div id="day" className="timer_num">
-                      {this.addLeadingZeros(countDown.days)}{" "}
+                      {addLeadingZeros(countDown.days)}
                     </div>
                     <div className="timer_unit">
                       {countDown.days === 1 ? "Day" : "Days"}
@@ -110,41 +72,40 @@ class Advertisement extends Component {
                   </li>
                   <li className="d-inline-flex flex-column justify-content-center align-items-center">
                     <div id="hour" className="timer_num">
-                      {this.addLeadingZeros(countDown.hours)}
+                      {addLeadingZeros(countDown.hours)}
                     </div>
                     <div className="timer_unit">Hours</div>
                   </li>
                   <li className="d-inline-flex flex-column justify-content-center align-items-center">
                     <div id="minute" className="timer_num">
-                      {this.addLeadingZeros(countDown.min)}
+                      {addLeadingZeros(countDown.min)}
                     </div>
                     <div className="timer_unit">Mins</div>
                   </li>
                   <li className="d-inline-flex flex-column justify-content-center align-items-center">
                     <div id="second" className="timer_num">
-                      {this.addLeadingZeros(countDown.sec)}
+                      {addLeadingZeros(countDown.sec)}
                     </div>
                     <div className="timer_unit">Sec</div>
                   </li>
                 </ul>
                 <div className="red_button deal_ofthe_week_button">
-                  <a href="#">shop now</a>
+                  <a href="#">Shop Now</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+  );
+};
 
 Advertisement.propTypes = {
-  date: PropTypes.string.isRequired
+  date: PropTypes.string.isRequired,
 };
 
 Advertisement.defaultProps = {
-  date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000).toString()
+  date: new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000).toString(), // 5 days from now
 };
 
 export default Advertisement;

@@ -4,54 +4,48 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import TopNavBar from "../components/TopNavBar";
 import NavBarContainer from "../components/NavBar/NavBarContainer";
 import MobileMenu from "../components/MobileMenu";
 import Footer from "../components/Footer";
 
-class BaseLayout extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      topHaderClass: "show",
+const BaseLayout = ({ children }) => {
+  const [topHeaderClass, setTopHeaderClass] = useState("show");
+
+  useEffect(() => {
+    // Scroll to top on mount
+    window.scrollTo(0, 0);
+
+    const handleScroll = () => {
+      if (window.scrollY >= 50) {
+        setTopHeaderClass("hide");
+      } else {
+        setTopHeaderClass("show");
+      }
     };
-    this.handleScroll = this.handleScroll.bind(this);
-  }
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    window.addEventListener("scroll", this.handleScroll);
-  }
 
-  componentWillMount() {
-    window.scrollTo(0, 0);
-  }
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
 
-  componentWillUnmount() {
-    window.removeEventListener("scroll", this.handleScroll);
-  }
+    // Cleanup on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
-  handleScroll = (event) => {
-    if (window.scrollY >= 50) {
-      this.setState({ topHaderClass: "hide" });
-    } else {
-      this.setState({ topHaderClass: "show" });
-    }
-  };
-  render() {
-    return (
+  return (
       <div className="main-wrapper">
         <div className="super_container">
           <header className="header trans_300">
-            <TopNavBar className={this.state.topHaderClass} />
+            <TopNavBar className={topHeaderClass} />
             <NavBarContainer />
           </header>
-          <div className="layout-Container">{this.props.children}</div>
+          <div className="layout-Container">{children}</div>
           <Footer />
         </div>
       </div>
-    );
-  }
-}
+  );
+};
 
 export default BaseLayout;

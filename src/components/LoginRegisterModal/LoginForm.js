@@ -4,132 +4,103 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../../redux/actions/LoginAction";
-import jumpTo from "../../modules/Navigation";
 import Validator from "../../utils/Validator";
 import { DEFAULT_RULE, EMAIL_RULE } from "../../utils/Validator/rule";
-import PropTypes from "prop-types";
 import LoadingButton from "../LoadingButton";
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: "",
-      loading: false
-    };
-  }
+const LoginForm = ({ forgotPasswordClicked, registerClicked }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  };
+  const dispatch = useDispatch();
+  const loginError = useSelector((state) => state.login.error);
 
-  handleSubmit = () => {
-    // let email = "bob@bob.com";
-    // let password = "Ab123123";
-    const { email, password } = this.state;
+  const handleSubmit = () => {
     if (!Validator(email, EMAIL_RULE)) {
-      console.log("email Error");
+      setError("Invalid email format");
       return;
     }
     if (!Validator(password, DEFAULT_RULE)) {
-      console.log("Password Error");
+      setError("Password does not meet the required criteria");
       return;
     }
-    this.setState({ loading: true });
-    this.props
-      .userLogin(email, password)
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false });
-        window.location.reload();
-      })
-      .catch(error => {
-        // console.log('loginsignin error')
-        console.log(error.response);
-        this.setState({ loading: false });
-      });
+
+    setLoading(true);
+    setError(""); // Clear previous errors
+    dispatch(userLogin(email, password))
+        .then(() => {
+          setLoading(false);
+          window.location.reload(); // Refresh after login
+        })
+        .catch((err) => {
+          setLoading(false);
+          setError(err?.response?.data?.message || "Login failed");
+        });
   };
 
-  render() {
-    return (
-      <div>
-        <div className="login-form">
-          <h2>Login</h2>
-          <div className="form-group ">
-            <input
+  return (
+      <div className="login-form">
+        <h2>Login</h2>
+        <div className="form-group">
+          <input
               type="text"
               className="form-control"
-              placeholder="Email "
-              id="UserName"
+              placeholder="Email"
               name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              autoComplete="false"
-            />
-            <i className="fa fa-user"></i>
-          </div>
-          <div className="form-group log-status">
-            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="off"
+          />
+          <i className="fa fa-user"></i>
+        </div>
+        <div className="form-group log-status">
+          <input
               type="password"
               className="form-control"
               placeholder="Password"
-              id="Passwod"
               name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              autoComplete="false"
-            />
-            <i className="fa fa-lock"></i>
-          </div>
-          <span className="alert">Invalid Credentials</span>
-          <a
-            className="link"
-            href="#"
-            onClick={this.props.forgotPasswordClicked}
-          >
-            Lost your password?
-          </a>
-          <LoadingButton
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+          />
+          <i className="fa fa-lock"></i>
+        </div>
+        {error && <span className="alert">{error}</span>}
+        <a className="link" href="#" onClick={forgotPasswordClicked}>
+          Lost your password?
+        </a>
+        <LoadingButton
             type="button"
             className="log-btn"
-            loading={this.state.loading}
-            onClick={() => this.handleSubmit()}
-          >
-            Log in
-          </LoadingButton>
-          <div
-            onClick={this.props.registerClicked}
+            loading={loading}
+            onClick={handleSubmit}
+        >
+          Log in
+        </LoadingButton>
+        <div
+            onClick={registerClicked}
             style={{
               textAlign: "center",
               fontSize: 12,
               color: "#c4c4c4",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
-          >
-            New user ? Please Register
-          </div>
+        >
+          New user? Please Register
         </div>
       </div>
-    );
-  }
-}
+  );
+};
 
 LoginForm.propTypes = {
   forgotPasswordClicked: PropTypes.func,
-  registerClicked: PropTypes.func
+  registerClicked: PropTypes.func,
 };
 
-const mapDispatchToProps = {
-  userLogin
-};
-const mapStoreToProps = state => ({
-  login_loading: state.login.login_loading,
-  login_error: state.login.error
-});
-
-export default connect(mapStoreToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;

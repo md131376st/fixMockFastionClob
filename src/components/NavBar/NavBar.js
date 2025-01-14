@@ -1,42 +1,24 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HomeCartView from "../HomeCartView";
 import MobileMenu from "../MobileMenu";
-import device, { size } from "../../modules/mediaQuery";
 import MediaQuery from "react-responsive";
+import device from "../../modules/mediaQuery";
 
-class NavBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalShow: false,
-      activeclass: false,
-    };
-  }
+const NavBar = ({ cart, departments, getCartByUserId }) => {
+  const [modalShow, setModalShow] = useState(false);
+  const [activeClass, setActiveClass] = useState(false);
 
-  componentDidMount() {
-    if (Object.keys(this.props.cart).length < 1) {
-      this.props.getCartByUserId();
+  useEffect(() => {
+    if (Object.keys(cart).length < 1) {
+      getCartByUserId();
     }
-  }
+  }, [cart, getCartByUserId]);
 
-  showHideModal = () => {
-    this.setState({ modalShow: !this.state.modalShow });
-  };
+  const toggleModal = () => setModalShow(!modalShow);
+  const toggleMenu = () => setActiveClass(!activeClass);
 
-  handleMenuClicked = () => {
-    this.setState({ activeclass: !this.state.activeclass });
-  };
-  render() {
-    const { departments, cart } = this.props;
-
-    return (
+  return (
       <div className="main_nav_container">
         <div className="container">
           <div className="row">
@@ -55,34 +37,27 @@ class NavBar extends Component {
                     <a href="#">
                       shop <i className="fa fa-angle-down"></i>
                     </a>
-
                     <div className="mega-menu">
                       <div className="mega-menu-wrap">
-                        {departments &&
-                          departments.map((item, index) => {
-                            return (
-                              <div className="mega-menu-content" key={index}>
-                                <h5>{item.departmentName}</h5>
-                                <ul className="stander">
-                                  {item.categories.split(",").map((i, idx) => {
-                                    return (
-                                      <li key={idx}>
-                                        <a
+                        {departments.map((item, index) => (
+                            <div className="mega-menu-content" key={index}>
+                              <h5>{item.departmentName}</h5>
+                              <ul className="stander">
+                                {item.categories.split(",").map((i, idx) => (
+                                    <li key={idx}>
+                                      <a
                                           href={`/fashion-cube/shops/${item.departmentName}/${i}`}
-                                        >
-                                          {i}
-                                        </a>
-                                      </li>
-                                    );
-                                  })}
-                                </ul>
-                              </div>
-                            );
-                          })}
+                                      >
+                                        {i}
+                                      </a>
+                                    </li>
+                                ))}
+                              </ul>
+                            </div>
+                        ))}
                       </div>
                     </div>
                   </li>
-
                   <li>
                     <a href="contact.html">contact</a>
                   </li>
@@ -99,20 +74,17 @@ class NavBar extends Component {
                     </a>
                   </li>
                   <li className="checkout">
-                    <a href="#" onClick={() => this.showHideModal()}>
+                    <a href="#" onClick={toggleModal}>
                       <i className="fas fa-shopping-bag"></i>
-                      {cart.totalQty !== undefined && (
-                        <span id="checkout_items" className="checkout_items">
-                          {cart.totalQty}
-                        </span>
+                      {cart.totalQty && (
+                          <span id="checkout_items" className="checkout_items">
+                        {cart.totalQty}
+                      </span>
                       )}
                     </a>
                   </li>
                 </ul>
-                <div
-                  className="hamburger_container"
-                  onClick={() => this.handleMenuClicked()}
-                >
+                <div className="hamburger_container" onClick={toggleMenu}>
                   <i className="fa fa-bars" aria-hidden="true"></i>
                 </div>
               </nav>
@@ -120,21 +92,13 @@ class NavBar extends Component {
           </div>
         </div>
         <MediaQuery query={device.max.tabletL}>
-          <MobileMenu
-            activeClass={this.state.activeclass}
-            onClose={() => this.handleMenuClicked()}
-          />
+          <MobileMenu activeClass={activeClass} onClose={toggleMenu} />
         </MediaQuery>
-        {this.state.modalShow ? (
-          <HomeCartView
-            cart={cart}
-            show={this.state.modalShow}
-            onHide={() => this.showHideModal()}
-          />
-        ) : null}
+        {modalShow && (
+            <HomeCartView cart={cart} show={modalShow} onHide={toggleModal} />
+        )}
       </div>
-    );
-  }
-}
+  );
+};
 
 export default NavBar;

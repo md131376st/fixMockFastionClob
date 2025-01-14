@@ -4,47 +4,46 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React from "react";
+import PropTypes from "prop-types";
+import { Modal } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import "./style.css";
-import PropTypes from "prop-types";
-class LoginRegister extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      showlogin: this.props.showlogin
-    };
-  }
 
-  render() {
-    return (
+const LoginRegister = ({ login, onHide, registerClicked, loginClicked, ...props }) => {
+  return (
       <Modal
-        {...this.props}
-        size="sm"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        id="loginModal"
-        className="modal fade login"
+          {...props}
+          size="sm"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+          id="loginModal"
+          className="modal fade login"
       >
         <Modal.Body>
-          <div className="modal--close--button" onClick={this.props.onHide}>
+          <div className="modal--close--button" onClick={onHide}>
             <i className="fas fa-times"></i>
           </div>
-          {this.props.login ? (
-            <LoginForm registerClicked={() => this.props.registerClicked()} />
+          {login ? (
+              <LoginForm registerClicked={registerClicked} />
           ) : (
-            <RegisterForm loginClicked={() => this.props.loginClicked()} />
+              <RegisterForm loginClicked={loginClicked} />
           )}
         </Modal.Body>
       </Modal>
-    );
-  }
-}
-LoginRegister.propTypes = {
-  login: PropTypes.bool,
-  registerClicked: PropTypes.func,
-  loginClicked: PropTypes.func
+  );
 };
+
+LoginRegister.propTypes = {
+  login: PropTypes.bool.isRequired,
+  onHide: PropTypes.func.isRequired,
+  registerClicked: PropTypes.func.isRequired,
+  loginClicked: PropTypes.func.isRequired,
+};
+
+LoginRegister.defaultProps = {
+  login: true,
+};
+
 export default LoginRegister;

@@ -1,21 +1,16 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
 import { connect } from "react-redux";
 import NavBar from "./NavBar";
 import { getDepartments } from "../../redux/actions/DepartmentAction";
 import { getCartByUserId } from "../../redux/actions/cartAction";
-const mapStoreToProps = state => ({
+
+const mapStateToProps = (state) => ({
   departments: state.department.departments,
-  cart: state.cart.cart
+  cart: state.cart.cart,
 });
 
-const mapDispatchToProps = dispatch => ({
-  getDepartments: dispatch(getDepartments()),
-  getCartByUserId: () => dispatch(getCartByUserId())
-});
+const mapDispatchToProps = {
+  getDepartments,
+  getCartByUserId,
+};
 
-export default connect(mapStoreToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
