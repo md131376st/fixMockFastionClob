@@ -4,8 +4,8 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
+import { Navigate } from "react-router-dom";
 
 // Layout Types
 import BaseLayout from "../layouts/BaseLayout";
@@ -15,28 +15,27 @@ import Home from "../views/Home/HomeContainer";
 import SingleProductContainer from "../views/Product/SingleProductContainer";
 import CategoryContainer from "../views/Category/CategoryContainer";
 
-var routes = [
+const routes = [
   {
     path: "/fashion-cube",
     exact: true,
     layout: BaseLayout,
-    component: Home,
+    component: <Home />,
   },
-
   {
     path: "/home",
     layout: BaseLayout,
-    component: () => <Redirect to="/fashion-cube" />,
+    component: <Navigate to="/fashion-cube" replace />,
   },
   {
     path: "/fashion-cube/single-product/:id",
     layout: BaseLayout,
-    component: SingleProductContainer,
+    component: <SingleProductContainer />,
   },
   {
     path: "/fashion-cube/shops/:category",
     layout: BaseLayout,
-    component: CategoryContainer,
+    component: <CategoryContainer />,
   },
 ];
 

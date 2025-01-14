@@ -5,19 +5,19 @@
  */
 
 // Route Views
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-
-// Layout Types
+import React from "react";
 import BaseLayout from "../layouts/BaseLayout";
-
 import CartContainer from "../views/Cart/CartContainer";
 
-var PrivateRoutes = [
+// Private Routes Configuration
+const PrivateRoutes = [
   {
     path: "/fashion-cube/cart",
-    layout: BaseLayout,
-    component: CartContainer,
+    element: (
+        <BaseLayout>
+          <CartContainer />
+        </BaseLayout>
+    ),
   },
 ];
 
