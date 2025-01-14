@@ -60,7 +60,7 @@ function Footer(props) {
               <div className="cr">
                 ©2018 All Rights Reserverd. This template is made with{" "}
                 <i className="fa fa-heart-o" aria-hidden="true"></i> by{" "}
-                <a href="https://quintuslabs.com/" target="_blank">
+                <a href="https://quintuslabs.com/" target="_blank" rel="noreferrer">
                   Quintus Labs
                 </a>
               </div>
