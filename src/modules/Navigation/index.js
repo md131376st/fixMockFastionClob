@@ -5,14 +5,29 @@
  */
 
 let history;
-export const registerNav = ref => {
-  history = ref.history;
+
+export const registerNav = (ref) => {
+  if (ref && ref.history) {
+    history = ref.history;
+  } else {
+    console.error("Invalid navigation reference passed.");
+  }
 };
 
-const jumpTo = uri => {
-  history.push(uri);
+export const go = (uri) => {
+  if (history) {
+    history.go(uri);
+  } else {
+    console.error("Navigation history is not registered.");
+  }
 };
-export const go = uri => {
-  history.go(uri);
+
+const jumpTo = (uri) => {
+  if (history) {
+    history.push(uri);
+  } else {
+    console.error("Navigation history is not registered.");
+  }
 };
+
 export default jumpTo;

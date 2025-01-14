@@ -8,11 +8,13 @@ class Auth {
   constructor() {
     this.user_token = JSON.parse(localStorage.getItem("auth")) || {};
   }
+
   getToken() {
-    return this.user_token.token;
+    return this.user_token?.token || null;
   }
+
   getUserId() {
-    return this.user_token.user_id;
+    return this.user_token?.user_id || null;
   }
 
   getUserDetails() {
@@ -23,8 +25,11 @@ class Auth {
     this.user_token = new_token;
     localStorage.setItem("auth", JSON.stringify(new_token));
   }
+
   logout() {
     localStorage.removeItem("auth");
+    this.user_token = {};
   }
 }
+
 export default new Auth();

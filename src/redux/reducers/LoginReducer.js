@@ -1,34 +1,18 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
-import {LOGIN_BEGIN, LOGIN_FAIL, LOGIN_SUCCESS} from "../actions/LoginAction";
+import { LOGIN_BEGIN, LOGIN_FAIL, LOGIN_SUCCESS } from "../actions/LoginAction";
 
 const initialState = {
-  login_loading: false,
-  error: {}
+  signin_loading: false,
+  error: null,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_BEGIN:
-      return {
-        ...state,
-        signin_loading: true
-      };
+      return { ...state, signin_loading: true };
     case LOGIN_SUCCESS:
-      return {
-        ...state,
-        signin_loading: false
-      };
+      return { ...state, signin_loading: false };
     case LOGIN_FAIL:
-      return {
-        ...state,
-        signin_loading: false,
-        error: action.payload.error.response.data
-      };
+      return { ...state, signin_loading: false, error: action.payload?.error?.response?.data };
     default:
       return state;
   }

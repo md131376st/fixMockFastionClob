@@ -1,33 +1,13 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
 import API from "../../axios/API";
 
-export const getVariantsByProductId = productId => dispatch => {
-  dispatch({
-    type: GET_VARIANTS_QUERY_BEGIN
-  });
-  return API({
-    method: "GET",
-    url: `/variants?productId=${productId}`
-  })
-    .then(res => {
-      dispatch({
-        type: GET_VARIANTS_QUERY_SUCCESS,
-        payload: res
-      });
-      return res;
-    })
-    .catch(error => {
-      dispatch({
-        type: GET_VARIANTS_QUERY_FAIL,
-        payload: { error }
-      });
-      return error;
-    });
+export const getVariantsByProductId = (productId) => async (dispatch) => {
+  dispatch({ type: GET_VARIANTS_QUERY_BEGIN });
+  try {
+    const response = await API.get(`/variants?productId=${productId}`);
+    dispatch({ type: GET_VARIANTS_QUERY_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: GET_VARIANTS_QUERY_FAIL, payload: error });
+  }
 };
 
 export const GET_VARIANTS_QUERY_BEGIN = "GET_VARIANTS_QUERY_BEGIN";

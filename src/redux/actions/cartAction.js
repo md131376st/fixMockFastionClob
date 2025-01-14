@@ -1,66 +1,31 @@
-/*
- ** Author: Santosh Kumar Dash
- ** Author URL: http://santoshdash.epizy.com/
- ** Github URL: https://github.com/quintuslabs/fashion-cube
- */
-
 import API from "../../axios/API";
 import Auth from "../../modules/Auth";
 
-export const getCartByUserId = () => dispatch => {
-  let userId = Auth.getUserId();
-  dispatch({
-    type: GET_CART_BY_USERID_BEGIN
-  });
-  return API({
-    method: "GET",
-    url: `users/${userId}/cart`
-  })
-    .then(res => {
-      dispatch({
-        type: GET_CART_BY_USERID_SUCCESS,
-        payload: res
-      });
-      return res;
-    })
-    .catch(error => {
-      dispatch({
-        type: GET_CART_BY_USERID_FAIL,
-        payload: { error }
-      });
-      return error;
-    });
+export const getCartByUserId = () => async (dispatch) => {
+  const userId = Auth.getUserId();
+  dispatch({ type: GET_CART_BY_USERID_BEGIN });
+  try {
+    const response = await API.get(`users/${userId}/cart`);
+    dispatch({ type: GET_CART_BY_USERID_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: GET_CART_BY_USERID_FAIL, payload: error });
+  }
 };
 
-export const postCart = (productId, increase, decrease) => dispatch => {
-  let userId = Auth.getUserId();
-  dispatch({
-    type: POST_CART_BEGIN
-  });
-  return API({
-    method: "POST",
-    url: `users/${userId}/cart`,
-    data: {
+export const postCart = (productId, increase, decrease) => async (dispatch) => {
+  const userId = Auth.getUserId();
+  dispatch({ type: POST_CART_BEGIN });
+  try {
+    const response = await API.post(`users/${userId}/cart`, {
       userId,
       productId,
       increase,
-      decrease
-    }
-  })
-    .then(res => {
-      dispatch({
-        type: POST_CART_SUCCESS,
-        payload: res
-      });
-      return res;
-    })
-    .catch(error => {
-      dispatch({
-        type: POST_CART_FAIL,
-        payload: { error }
-      });
-      return error;
+      decrease,
     });
+    dispatch({ type: POST_CART_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: POST_CART_FAIL, payload: error });
+  }
 };
 
 export const POST_CART_BEGIN = "POST_CART_BEGIN";

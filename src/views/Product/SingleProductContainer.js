@@ -5,13 +5,11 @@
  */
 
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import SingleProduct from "./SingleProduct";
-import {
-  getProduct,
-  getVariantsByProductId,
-} from "../../redux/actions/productAction";
-import { postCart } from "../../redux/actions/cartAction";
+import {getProduct,} from "../../redux/actions/productAction";
+import {postCart} from "../../redux/actions/cartAction";
+import { getVariantsByProductId } from "../../redux/actions/variantsAction";
 
 const SingleProductContainer = ({ location }) => {
   const product = useSelector((state) => state.product.product);

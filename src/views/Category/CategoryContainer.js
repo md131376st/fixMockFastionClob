@@ -15,23 +15,17 @@ const CategoryContainer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
-
-  const handleApplyFilters = (filterString) => {
-    dispatch(applyFilters(filterString));
-  };
-
-  const handlePostCart = (productId) => {
-    dispatch(postCart(productId));
-  };
+    if (!products || products.length === 0) {
+      dispatch(getAllProducts());
+    }
+  }, [dispatch, products]);
 
   return (
       <Category
           products={products}
           getAllProducts={() => dispatch(getAllProducts())}
-          applyFilters={handleApplyFilters}
-          postCart={handlePostCart}
+          applyFilters={(filterString) => dispatch(applyFilters(filterString))}
+          postCart={(productId) => dispatch(postCart(productId))}
       />
   );
 };
