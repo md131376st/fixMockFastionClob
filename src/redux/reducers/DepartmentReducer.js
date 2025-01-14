@@ -4,11 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {
-  GET_DEPARTMENTS_BEGIN,
-  GET_DEPARTMENTS_SUCCESS,
-  GET_DEPARTMENTS_FAIL
-} from "../actions/DepartmentAction";
+import {GET_DEPARTMENTS_BEGIN, GET_DEPARTMENTS_FAIL, GET_DEPARTMENTS_SUCCESS} from "../actions/DepartmentAction";
 
 const initialState = {
   loading: false,

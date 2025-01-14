@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import { register } from "../../ServerRequest";
+import {register} from "../../ServerRequest";
 
 export const userRegister = (
   fullname,

@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import { login } from "../../ServerRequest";
+import {login} from "../../ServerRequest";
 
 export const userLogin = (email, password) => dispatch => {
   dispatch({

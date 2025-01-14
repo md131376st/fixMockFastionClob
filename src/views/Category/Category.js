@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import SingleProduct from "../../components/Products/SingleProduct";
 import Auth from "../../modules/Auth";
 import LoginRegister from "../../components/LoginRegisterModal";

@@ -4,9 +4,9 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Cart from "./Cart";
-import { getCartByUserId, postCart } from "../../redux/actions/cartAction";
+import {getCartByUserId, postCart} from "../../redux/actions/cartAction";
 
 const mapStoreToProps = (state) => ({
   cart: state.cart.cart,

@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 class Filter extends Component {
   constructor(props) {

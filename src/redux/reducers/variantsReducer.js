@@ -4,11 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {
-  GET_VARIANTS_QUERY_BEGIN,
-  GET_VARIANTS_QUERY_SUCCESS,
-  GET_VARIANTS_QUERY_FAIL
-} from "../actions/variantsAction";
+import {GET_VARIANTS_QUERY_BEGIN, GET_VARIANTS_QUERY_FAIL, GET_VARIANTS_QUERY_SUCCESS} from "../actions/variantsAction";
 
 const initialState = {
   variants: null,

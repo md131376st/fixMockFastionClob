@@ -4,10 +4,10 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Heading from "../../components/Heading";
 import CartItem from "./CartItem";
-import { Button } from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import CalculateTax from "../../utils/CalculateTax";
 import EmptyCart from "../../assets/images/empty_cart.png";
 

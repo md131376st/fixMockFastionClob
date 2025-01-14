@@ -1,6 +1,6 @@
 import rootReducer from "../reducers";
 import {applyMiddleware, compose, createStore} from "redux";
-import { thunk } from 'redux-thunk'; // Correctly import the named export
+import {thunk} from 'redux-thunk'; // Correctly import the named export
 
 
 const initialState = {};

@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import login from "./LoginReducer";
 import register from "./RegisterReducer";
 import department from "./DepartmentReducer";

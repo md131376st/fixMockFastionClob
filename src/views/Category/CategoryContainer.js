@@ -4,13 +4,10 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {
-  getAllProducts,
-  applyFilters
-} from "../../redux/actions/productAction";
-import { connect } from "react-redux";
+import {applyFilters, getAllProducts} from "../../redux/actions/productAction";
+import {connect} from "react-redux";
 import Category from "./Category";
-import { postCart } from "../../redux/actions/cartAction";
+import {postCart} from "../../redux/actions/cartAction";
 
 const mapStoreToProps = state => ({
   products: state.product.products,

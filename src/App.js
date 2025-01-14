@@ -4,27 +4,23 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import "./assets/css/style.css";
 import "./assets/css/responsive.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Routes from "./routes";
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  componentDidMount() {
+
+const App = () => {
+  useEffect(() => {
     AOS.init();
-  }
-  render() {
-    return (
+  }, []);
+
+  return (
       <div>
         <Routes />
       </div>
-    );
-  }
-}
+  );
+};
 
 export default App;

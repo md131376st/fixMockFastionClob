@@ -4,11 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import {
-  POST_REGISTER_BEGIN,
-  POST_REGISTER_SUCCESS,
-  POST_REGISTER_FAIL
-} from "../actions/RegisterAction";
+import {POST_REGISTER_BEGIN, POST_REGISTER_FAIL, POST_REGISTER_SUCCESS} from "../actions/RegisterAction";
 
 const initialState = {
   register_loading: false,

@@ -1,12 +1,11 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { registerNav } from "../modules/Navigation";
 import PageNotFound from "../views/PageNotFound";
 import HomeRoutes from "./HomeRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import Auth from "../modules/Auth";
 
-// RequireAuth Component for Private Routes
 const RequireAuth = ({ children }) => {
     const isAuthenticated =
         Auth.getUserDetails() !== undefined &&
@@ -16,52 +15,29 @@ const RequireAuth = ({ children }) => {
     return isAuthenticated ? children : <Navigate to="/PageNotFound" replace />;
 };
 
-class RoutesComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const RoutesComponent = () => {
+    return (
+        <Router ref={registerNav}>
+            <Routes>
+                {/* Home Routes */}
+                {HomeRoutes.map((route, index) => (
+                    <Route key={index} path={route.path} element={route.element} />
+                ))}
 
-    render() {
-        return (
-            <div>
-                <Router ref={registerNav}>
-                    <Routes>
-                        {/* Home Routes */}
-                        {HomeRoutes.map((homeRoute, index) => (
-                            <Route
-                                key={index}
-                                path={homeRoute.path}
-                                element={
-                                    <homeRoute.layout>
-                                        <homeRoute.component />
-                                    </homeRoute.layout>
-                                }
-                            />
-                        ))}
+                {/* Private Routes */}
+                {PrivateRoutes.map((route, index) => (
+                    <Route
+                        key={index}
+                        path={route.path}
+                        element={<RequireAuth>{route.element}</RequireAuth>}
+                    />
+                ))}
 
-                        {/* Private Routes */}
-                        {PrivateRoutes.map((privateRoute, index) => (
-                            <Route
-                                key={index}
-                                path={privateRoute.path}
-                                element={
-                                    <RequireAuth>
-                                        <privateRoute.layout>
-                                            <privateRoute.component />
-                                        </privateRoute.layout>
-                                    </RequireAuth>
-                                }
-                            />
-                        ))}
-
-                        {/* Page Not Found */}
-                        <Route path="*" element={<PageNotFound />} />
-                    </Routes>
-                </Router>
-            </div>
-        );
-    }
-}
+                {/* Page Not Found */}
+                <Route path="*" element={<PageNotFound />} />
+            </Routes>
+        </Router>
+    );
+};
 
 export default RoutesComponent;

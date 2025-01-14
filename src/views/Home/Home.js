@@ -4,9 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import React, { Component } from "react";
-import { login } from "../../ServerRequest";
-import API from "../../axios/API";
+import React, {Component} from "react";
 import Auth from "../../modules/Auth";
 import HomeBanner from "../../components/HomeBanner";
 import CategoryBanner from "../../components/CategoryBanner/CategoryBanner";
@@ -14,8 +12,6 @@ import NewArrivals from "../../components/Products/NewArrivals";
 import BestSeller from "../../components/Products/BestSeller";
 import Benefit from "../../components/Benefit";
 import Advertisement from "../../components/Advertisement";
-import PropTypes from "prop-types";
-import jumpTo from "../../modules/Navigation";
 import LoginRegister from "../../components/LoginRegisterModal";
 
 class Home extends Component {

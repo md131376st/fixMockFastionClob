@@ -18,24 +18,31 @@ import CategoryContainer from "../views/Category/CategoryContainer";
 const routes = [
   {
     path: "/fashion-cube",
-    exact: true,
-    layout: BaseLayout,
-    component: <Home />,
+    element: (
+        <BaseLayout>
+          <Home />
+        </BaseLayout>
+    ),
   },
   {
     path: "/home",
-    layout: BaseLayout,
-    component: <Navigate to="/fashion-cube" replace />,
+    element: <Navigate to="/fashion-cube" replace />,
   },
   {
     path: "/fashion-cube/single-product/:id",
-    layout: BaseLayout,
-    component: <SingleProductContainer />,
+    element: (
+        <BaseLayout>
+          <SingleProductContainer />
+        </BaseLayout>
+    ),
   },
   {
     path: "/fashion-cube/shops/:category",
-    layout: BaseLayout,
-    component: <CategoryContainer />,
+    element: (
+        <BaseLayout>
+          <CategoryContainer />
+        </BaseLayout>
+    ),
   },
 ];
 

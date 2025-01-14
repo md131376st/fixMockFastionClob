@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom/client"; // Updated import for React 18
+import { createRoot } from 'react-dom/client';
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,13 +8,13 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 const rootElement = document.getElementById("root"); // Reference to the root element
-const root = ReactDOM.createRoot(rootElement); // Create a root
+const root = createRoot(rootElement); // Create a root
 
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
+        {/*<Provider store={store}>*/}
             <App />
-        </Provider>
+        {/*</Provider>*/}
     </React.StrictMode>
 );
 

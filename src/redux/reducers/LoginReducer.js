@@ -4,7 +4,7 @@
  ** Github URL: https://github.com/quintuslabs/fashion-cube
  */
 
-import { LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_FAIL } from "../actions/LoginAction";
+import {LOGIN_BEGIN, LOGIN_FAIL, LOGIN_SUCCESS} from "../actions/LoginAction";
 
 const initialState = {
   login_loading: false,
